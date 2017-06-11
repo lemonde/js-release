@@ -26,6 +26,8 @@ function getCurrentVersion(registry, callback) {
 }
 
 function getMergesSince(registry, callback) {
+  console.log('\nChangelog:\n');
+
   exec(`git log --merges --pretty='* %b (%h)' ${registry.currentVersion}..HEAD`, (err, stdout) => {
     if (err) return callback(err);
     console.log(stdout);

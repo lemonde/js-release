@@ -77,7 +77,7 @@ function bumpVersion(registry, callback) {
 }
 
 function displayNewReleaseUrl(registry, callback) {
-  services.releaseLink(registry.nextVersion, (err, link) => {
+  services.releaseLink(`v${registry.nextVersion}`, (err, link) => {
     if (err) return callback(err);
     console.log(link);
     return callback(null, registry);
