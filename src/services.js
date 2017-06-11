@@ -59,7 +59,7 @@ module.exports.fetchTags = (callback) => {
 module.exports.bumpVersion = ({ version, dryRun = false }, callback) => {
   console.log('... Create version using mVersion');
 
-  const cmd = `${path.join(__dirname, '..', 'node_modules/.bin/mversion')} ${version} -m`;
+  const cmd = `${path.join(__dirname, '..', 'node_modules/.bin/mversion')} ${version}`;
 
   if (dryRun) {
     console.log(`[Dry run] ${cmd}`);
