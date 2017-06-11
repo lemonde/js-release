@@ -2,7 +2,7 @@ const exec = require('child_process').exec;
 const semver = require('semver');
 const async = require('async');
 
-const clean = str => str.replace(/\\n/mg, '');
+const clean = str => str.replace(/\n/mg, '');
 
 module.exports = ({ mode = 'patch', dryRun = false, packagePath = '', shrinkwrapPath = null }, callback) => {
   const registry = { mode, dryRun, packagePath, shrinkwrapPath };

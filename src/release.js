@@ -7,7 +7,7 @@ const path = require('path');
 
 const changelog = require('./changelog');
 
-const clean = str => str.replace(/\\n/mg, '');
+const clean = str => str.replace(/\n/mg, '');
 
 module.exports = ({ mode = 'patch', dryRun = false }, callback) => {
   const registry = { mode, dryRun };
