@@ -2,10 +2,12 @@
 
 const changelog = require('../src/changelog');
 const release = require('../src/release');
+const init = require('../src/init');
 
 const args = [].slice.call(process.argv, 2);
 const cmd = args[0];
 const dryRun = args.indexOf('-d') !== -1 || args.indexOf('--dry-run') !== -1;
+const ignoreStaged = args.indexOf('-i') !== -1 || args.indexOf('--ignore-not-staged') !== -1;
 const mode = cmd === 'create' ? args[1] : null;
 const exit = (err) => {
   if (err) console.error(err.message);
@@ -13,7 +15,8 @@ const exit = (err) => {
 };
 
 function cli() {
-  if (cmd === 'create') return release({ mode, dryRun }, exit);
+  if (cmd === 'init') return init({ mode, dryRun, ignoreStaged }, exit);
+  if (cmd === 'create') return release({ mode, dryRun, ignoreStaged }, exit);
   if (cmd === 'changelog') return changelog({ mode }, exit);
   if (cmd !== 'help') console.error(new Error('Unknown command'));
 
@@ -23,10 +26,12 @@ function cli() {
   Command:
   * js-release help                           display help (current view)
   * js-release changelog                      display changelog, merge commits since last release
-  * js-release create (patch|minor|major)     create a new (patch|minor|major) release
+  * js-release create <patch|minor|major>     create a new (patch|minor|major) release
+  * js-release init                           create the first release extracted from the package.json version
 
   Options:
   * -d  --dry-run
+  * -i  --ignore-not-staged
   `);
 
   return exit();

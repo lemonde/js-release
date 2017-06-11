@@ -3,9 +3,8 @@ const semver = require('semver');
 const async = require('async');
 
 const services = require('./services');
-const changelog = require('./changelog');
 
-module.exports = ({ mode = 'patch', dryRun = false, ignoreStaged = false }, callback) => {
+module.exports = ({ mode = 'patch', dryRun = false, ignoreStaged = false, firstRelease = false }, callback) => {
   if (dryRun) console.log('Dry run mode');
   if (ignoreStaged) console.log('Changes not staged will be ignored');
 
@@ -44,40 +43,31 @@ function getCurrentVersion(registry, callback) {
   services.version((err, currentVersion) => {
     if (err) return callback(err);
 
-    const nextVersion = semver.inc(currentVersion, registry.mode);
-
     if (!semver.valid(currentVersion)) return callback(new Error(`Current version is not a semver version : ${currentVersion}`));
-    if (!semver.valid(nextVersion)) return callback(new Error(`Next version is not a semver version : ${nextVersion}`));
 
-    Object.assign(registry, { currentVersion, nextVersion });
+    Object.assign(registry, { currentVersion });
 
     return callback(null, registry);
   });
 }
 
 function confirmCreation(registry, callback) {
-  async.series([
-    next => changelog(registry, next),
-    (next) => {
-      console.log(`Bump version from ${registry.currentVersion} to v${registry.nextVersion}`);
-      read({ prompt: `Create release v${registry.nextVersion} ?`, default: 'Y' }, (err, input) => {
-        if (err) return next(err);
-        if (input === 'Y') return next();
-        return next(new Error('User interruption'));
-      });
-    },
-  ], err => callback(err, registry));
+  read({ prompt: `Create release ${registry.currentVersion} ?`, default: 'Y' }, (err, input) => {
+    if (err) return callback(err);
+    if (input === 'Y') return callback(null, registry);
+    return callback(new Error('User interruption'));
+  });
 }
 
 function bumpVersion(registry, callback) {
   services.bumpVersion({
-    version: registry.mode,
+    version: registry.currentVersion,
     dryRun: registry.dryRun,
   }, err => callback(err, registry));
 }
 
 function displayNewReleaseUrl(registry, callback) {
-  services.releaseLink(registry.nextVersion, (err, link) => {
+  services.releaseLink(registry.currentVersion, (err, link) => {
     if (err) return callback(err);
     console.log(link);
     return callback(null, registry);

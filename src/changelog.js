@@ -2,28 +2,26 @@ const exec = require('child_process').exec;
 const semver = require('semver');
 const async = require('async');
 
-const clean = str => str.replace(/\n/mg, '');
+const services = require('./services');
 
-module.exports = ({ mode = 'patch', dryRun = false, packagePath = '', shrinkwrapPath = null }, callback) => {
-  const registry = { mode, dryRun, packagePath, shrinkwrapPath };
-
-  async.series([
-    next => getCurrentVersion(registry, next),
-    next => getMergesSince(registry, next),
+module.exports = ({ mode = 'patch', currentVersion = null }, callback) => {
+  async.waterfall([
+    next => getCurrentVersion({ mode, currentVersion }, next),
+    (registry, next) => getMergesSince(registry, next),
   ], callback);
 };
 
 function getCurrentVersion(registry, callback) {
-  exec('git describe --abbrev=0 --tags', (err, stdout) => {
-    if (err) return callback(err);
+  if (registry.currentVersion) return callback(null, registry);
 
-    const currentVersion = clean(stdout);
+  return services.version((err, currentVersion) => {
+    if (err) return callback(err);
 
     if (!semver.valid(currentVersion)) return callback(new Error(`Current version is not a semver version : ${currentVersion}`));
 
-    Object.assign({ currentVersion });
+    Object.assign(registry, { currentVersion });
 
-    return callback();
+    return callback(null, registry);
   });
 }
 
@@ -31,6 +29,6 @@ function getMergesSince(registry, callback) {
   exec(`git log --merges --pretty='* %b (%h)' ${registry.currentVersion}..HEAD`, (err, stdout) => {
     if (err) return callback(err);
     console.log(stdout);
-    return callback();
+    return callback(null, registry);
   });
 }
