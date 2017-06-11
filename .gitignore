@@ -1,0 +1,10 @@
+# Commons trash files
+*.log
+.DS_Store
+.sass-cache
+.vscode
+dump.rdb
+npm-debug.log.*
+
+# Server dependencies
+node_modules

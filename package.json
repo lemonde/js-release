@@ -1,0 +1,34 @@
+{
+  "name": "js-release",
+  "version": "1.0.0",
+  "description": "Tool to create releases on github",
+  "bin": "./bin/release.js",
+  "main": "./lib/release.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemonde/js-release.git"
+  },
+  "keywords": [
+    "release"
+  ],
+  "author": "JBustin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lemonde/js-release/issues"
+  },
+  "homepage": "https://github.com/lemonde/js-release#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.3.0"
+  },
+  "dependencies": {
+    "async": "^2.4.1",
+    "mversion": "^1.10.1",
+    "read": "^1.0.7",
+    "semver": "^5.3.0"
+  }
+}
