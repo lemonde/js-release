@@ -2,21 +2,24 @@
   "name": "js-release",
   "version": "0.1.9",
   "description": "Tool to create releases on github",
-  "bin": {
-    "js-release": "bin/release.js"
-  },
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lemonde/js-release.git"
+  "engines": {
+    "node": "6.x"
   },
   "keywords": [
     "release"
   ],
-  "author": "JBustin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemonde/js-release.git"
+  },
+  "bin": "bin/release.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "JBustin"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lemonde/js-release/issues"
