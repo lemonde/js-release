@@ -1,9 +1,9 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 
 const fs = require('fs');
 const path = require('path');
 
-const { changelog, release, init } = require('../index');
+const { changelog, release, init } = require('./');
 
 const args = [].slice.call(process.argv, 2);
 const cmd = args[0];
@@ -16,7 +16,7 @@ const exit = (err) => {
   process.exit(1);
 };
 
-const version = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json')).toString()).version;
+const version = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')).toString()).version;
 
 function cli() {
   if (cmd === 'init') return init({ mode, dryRun, ignoreStaged }, exit);
@@ -43,3 +43,4 @@ function cli() {
 }
 
 cli();
+

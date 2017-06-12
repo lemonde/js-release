@@ -12,7 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/lemonde/js-release.git"
   },
-  "bin": "bin/release.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
