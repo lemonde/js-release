@@ -16,7 +16,7 @@ const exit = (err) => {
   process.exit(1);
 };
 
-const version = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')).toString()).version;
+const version = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json')).toString()).version;
 
 function cli() {
   if (cmd === 'init') return init({ mode, dryRun, ignoreStaged }, exit);
