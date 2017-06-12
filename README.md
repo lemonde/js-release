@@ -5,7 +5,7 @@
 
 ## Comment l'utiliser ?
 
-* Aides, commandes et options : `js-release help` (or other)
-* Afficher le changelog, c'est à dire les commits de merge depuis la dernière release : `js-release changelog`
-* Créer une release, mode interactif : `js-release create (patch|minor|major)`
-* Créer une release initiale, mode interactif : `js-release init`
+* Aides, commandes et options : `node cli help` (or other)
+* Afficher le changelog, c'est à dire les commits de merge depuis la dernière release : `node cli changelog`
+* Créer une release, mode interactif : `node cli create (patch|minor|major)`
+* Créer une release initiale, mode interactif : `node cli init`
