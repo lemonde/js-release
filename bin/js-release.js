@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-const changelog = require('../src/changelog');
-const release = require('../src/release');
-const init = require('../src/init');
+const { changelog, release, init } = require('../index');
 
 const args = [].slice.call(process.argv, 2);
 const cmd = args[0];
