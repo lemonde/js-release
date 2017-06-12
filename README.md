@@ -7,5 +7,5 @@
 
 * Aides, commandes et options : `node cli help` (or other)
 * Afficher le changelog, c'est à dire les commits de merge depuis la dernière release : `node cli changelog`
-* Créer une release, mode interactif : `node cli release (patch|minor|major)`
+* Créer une release, mode interactif : `node cli add (patch|minor|major)`
 * Créer une release initiale, mode interactif : `node cli init`
