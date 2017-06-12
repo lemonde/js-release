@@ -14,7 +14,7 @@ const mode = cmd === 'add' ? args[1] : null;
 
 const exit = (err) => {
   if (err) console.error(err.message);
-  process.exit(1);
+  process.exit(err ? 1 : 0);
 };
 
 const version = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')).toString()).version;
