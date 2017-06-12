@@ -10,7 +10,7 @@ const cmd = args[0];
 const dryRun = args.indexOf('-d') !== -1 || args.indexOf('--dry-run') !== -1;
 const ignoreStaged = args.indexOf('-i') !== -1 || args.indexOf('--ignore-not-staged') !== -1;
 const help = args.indexOf('-h') !== -1 || args.indexOf('--help') !== -1;
-const mode = cmd === 'release' ? args[1] : null;
+const mode = cmd === 'add' ? args[1] : null;
 
 const exit = (err) => {
   if (err) console.error(err.message);
