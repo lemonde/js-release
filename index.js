@@ -1,5 +1,5 @@
-const changelog = require('./src/changelog');
-const release = require('./src/release');
-const init = require('./src/init');
+const changelog = require('./lib/changelog');
+const release = require('./lib/release');
+const init = require('./lib/init');
 
 module.exports = { changelog, release, init };
