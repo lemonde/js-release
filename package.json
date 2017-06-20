@@ -31,7 +31,9 @@
   },
   "dependencies": {
     "async": "^2.4.1",
+    "github-release-cli": "^0.3.0",
     "mversion": "^1.10.1",
+    "parse-repo": "^1.0.1",
     "read": "^1.0.7",
     "semver": "^5.3.0"
   }
