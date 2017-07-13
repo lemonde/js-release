@@ -15,7 +15,7 @@
 Il est possible d'exécuter un script :
 - après la confirmation de la création d'une release
 - après la création de la release
-- afficher un changelog personnalisé
+- afficher un changelog personnalisé (string ou fonction, prenant en paramètre la version courante)
 
 par défaut le changelog sera le suivant:
 `git log --merges --pretty='* %b (%h)' ${registry.currentVersion}..HEAD`
