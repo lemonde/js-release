@@ -1,6 +1,6 @@
 {
   "name": "js-release",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Tool to create releases on github",
   "engines": {
     "node": "6.x"
