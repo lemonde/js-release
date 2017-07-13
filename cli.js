@@ -47,7 +47,14 @@ function cli() {
 
   if (cmd === 'init') return init({ mode, dryRun, ignoreStaged, ignoreIsMaster }, exit);
   if (cmd === 'add') return release({ mode, dryRun, ignoreStaged, ignoreIsMaster, staticConfig }, exit);
-  if (cmd === 'changelog') return changelog({ mode, staticConfig }, exit);
+  if (cmd === 'changelog') {
+    return changelog({ mode, staticConfig }, (err, changelogStr) => {
+      if (err) return exit(err);
+      console.log(changelogStr);
+      return exit();
+    });
+  }
+
   if (cmd !== 'help') console.info('Unknown command !!');
 
   displayHelp();
