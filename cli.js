@@ -8,12 +8,14 @@ const { changelog, release, init } = require('./');
 const args = [].slice.call(process.argv, 2);
 const cmd = args[0];
 const dryRun = args.indexOf('-d') !== -1 || args.indexOf('--dry-run') !== -1;
-const ignoreStaged = args.indexOf('-i') !== -1 || args.indexOf('--ignore-not-staged') !== -1;
-const ignoreIsMaster = args.indexOf('-i') !== -1 || args.indexOf('--ignore-is-master') !== -1;
+const ignoreStaged =
+  args.indexOf('-i') !== -1 || args.indexOf('--ignore-not-staged') !== -1;
+const ignoreIsMaster =
+  args.indexOf('-i') !== -1 || args.indexOf('--ignore-is-master') !== -1;
 const help = args.indexOf('-h') !== -1 || args.indexOf('--help') !== -1;
 const mode = cmd === 'add' ? args[1] : null;
 
-const exit = (err) => {
+const exit = err => {
   if (err) console.error(err.message);
   process.exit(err ? 1 : 0);
 };
@@ -22,7 +24,9 @@ let version = '';
 let staticConfig = {};
 
 try {
-  version = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')).toString()).version;
+  version = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, './package.json')).toString()
+  ).version;
 } catch (err) {
   console.info(`Can't load package.json : ${err.message}`);
 }
@@ -43,10 +47,16 @@ function cli() {
 
   if (dryRun) console.log('Option: dry run mode');
   if (ignoreStaged) console.log('Option: changes not staged will be ignored');
-  if (ignoreIsMaster) console.log('Option: execution on branch master not required');
+  if (ignoreIsMaster)
+    console.log('Option: execution on branch master not required');
 
-  if (cmd === 'init') return init({ mode, dryRun, ignoreStaged, ignoreIsMaster }, exit);
-  if (cmd === 'add') return release({ mode, dryRun, ignoreStaged, ignoreIsMaster, staticConfig }, exit);
+  if (cmd === 'init')
+    return init({ mode, dryRun, ignoreStaged, ignoreIsMaster }, exit);
+  if (cmd === 'add')
+    return release(
+      { mode, dryRun, ignoreStaged, ignoreIsMaster, staticConfig },
+      exit
+    );
   if (cmd === 'changelog') {
     return changelog({ mode, staticConfig }, (err, changelogStr) => {
       if (err) return exit(err);
@@ -82,4 +92,3 @@ function displayHelp() {
 }
 
 cli();
-
