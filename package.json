@@ -3,7 +3,7 @@
   "version": "0.5.6",
   "description": "Tool to create releases on github",
   "engines": {
-    "node": ">=6 <=8"
+    "node": ">=6"
   },
   "keywords": [
     "release"
