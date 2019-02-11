@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "async": "2.6.1",
-    "github-release-cli": "0.4.1",
+    "github-release-cli": "1.0.1",
     "mversion": "1.12.0",
     "parse-repo": "1.0.4",
     "read": "1.0.7",
